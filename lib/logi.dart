@@ -14,7 +14,7 @@ class Paginalogin extends StatelessWidget {
       ),
       body: Center(
         child: Expanded(
-          child: Container(
+          child: Padding(padding: EdgeInsets.all(10),
             child: OutlinedButton(
               onPressed: () {},
               child: Row(
@@ -22,10 +22,11 @@ class Paginalogin extends StatelessWidget {
                 children: [
                   Image.asset(
                     "assets/logoGo.png",
-                    scale: 6,
+                    width: 50,
+                      height: 50,
                   ),
                   Text(
-                    "        Ingresa con Google",
+                    "        Ingress con Google",
                     style: TextStyle(fontSize: 20),
                   )
                 ],

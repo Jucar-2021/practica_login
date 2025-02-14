@@ -27,7 +27,7 @@ class SplashPantalla extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // ajuste del tiempo de pantalla de presentacion
-    Future.delayed(const Duration(seconds: 6), () {
+    Future.delayed(const Duration(seconds: 4), () {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => const Paginalogin()),
