@@ -35,7 +35,7 @@ class _LibrosFirebaseState extends State<LibrosFirebase> {
                       MaterialPageRoute(
                           builder: (context) => Paginabusqueda()));
                 },
-                icon: Icon(Icons.search)),
+                icon: Icon(Icons.saved_search)),
             IconButton(
                 onPressed: () {
                   Navigator.push(

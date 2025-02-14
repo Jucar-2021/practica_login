@@ -2,7 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'logi.dart';
 import 'package:lottie/lottie.dart';
-import '';
+
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
