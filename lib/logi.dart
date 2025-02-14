@@ -18,7 +18,7 @@ class Paginalogin extends StatelessWidget {
         backgroundColor: Colors.amber,
       ),
       body: Center(
-        child: Expanded(
+        child: Container(
           child: Padding(padding: EdgeInsets.all(10),
             child: OutlinedButton(
               onPressed: () {

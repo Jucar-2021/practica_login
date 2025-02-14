@@ -18,24 +18,31 @@ class Paginalogin extends StatelessWidget {
       body: Center(
         child: Container(
           width: 300,
-          child: OutlinedButton(
-              onPressed: () {
-                iniciarConGoogle().whenComplete(() => Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => LibrosFirebase())));
-              },
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset(
-                    "assets/logoGo.png",
-                    scale: 4,
-                  ),
-                  Text(
-                    "Ingresa con Google",
-                    style: TextStyle(fontSize: 20),
-                  )
-                ],
-              )),
+          child: ElevatedButton(
+            onPressed: () {
+              iniciarConGoogle().whenComplete(() => Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => LibrosFirebase()),
+              ));
+            },
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset(
+                  "assets/logoGo.png",
+                  scale: 4,
+                  errorBuilder: (context, error, stackTrace) {
+                    return Icon(Icons.error, color: Colors.red); // Si hay error, muestra un ícono
+                  },
+                ),
+                const SizedBox(width: 10),
+                Text(
+                  "Ingresa con Google",
+                  style: TextStyle(fontSize: 20, color: Colors.black),
+                ),
+              ],
+            ),
+          )
         ),
       ),
     );
