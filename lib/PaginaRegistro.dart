@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:practica_login/CargaPDF.dart';
 
 class Paginaregistro extends StatefulWidget {
   const Paginaregistro({super.key});
@@ -21,6 +22,11 @@ class _PaginaregistroState extends State<Paginaregistro> {
   TextEditingController ctrlGenero = new TextEditingController();
   TextEditingController ctrlPaginas = new TextEditingController();
   TextEditingController ctrlEditorial = new TextEditingController();
+  late String t;
+  late String a;
+  late String g;
+  late String p;
+  late String e;
 
   @override
   Widget build(BuildContext context) {
@@ -117,7 +123,24 @@ class _PaginaregistroState extends State<Paginaregistro> {
                         setState(() {});
                       }
                     },
-                    child: Text("Buscar Portada")),
+                    child: Text("Buscar imagen")),
+
+               Padding(padding: EdgeInsets.symmetric(vertical: 15)
+               ), ElevatedButton(onPressed: (){
+                  setState(() {
+                    t = ctrlTitulo.text;
+                    a = ctrlAutor.text;
+                    g = ctrlGenero.text;
+                    p = ctrlPaginas.text;
+                    e = ctrlEditorial.text;
+                  });
+                 Navigator.push(context, MaterialPageRoute(builder: (context)=> CargaLibro(t: t, a: a, g: g, p: p, e: e)));
+                 ctrlTitulo.clear();
+                 ctrlEditorial.clear();
+                 ctrlPaginas.clear();
+                 ctrlGenero.clear();
+                 ctrlAutor.clear();
+                }, child: Text("Extraer Imagen de Libro")),
                 Padding(padding: EdgeInsets.symmetric(vertical: 15.0)),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,

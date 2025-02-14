@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: "Reconocimiento de imagenes",
+      title: "AG3 FireBase",
       debugShowCheckedModeBanner: false,
       home: SplashPantalla(),
       theme: ThemeData.light(),

@@ -37,6 +37,11 @@ dependencies:
   google_sign_in: ^6.2.2
   firebase_database: ^11.3.1
   firebase_core: ^3.11.0
+  pdfx: ^2.8.0
+  path_provider: ^2.1.5
+  file_picker: ^8.1.7
+  open_file: ^3.5.10
+  firebase_storage: ^12.4.2
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -68,6 +73,7 @@ flutter:
   assets:
     - assets/lib.json
     - assets/logoGo.png
+    - assets/libr.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

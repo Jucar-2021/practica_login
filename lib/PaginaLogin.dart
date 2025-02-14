@@ -6,6 +6,7 @@ class Paginalogin extends StatelessWidget {
   const Paginalogin({super.key});
 
   @override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
@@ -26,7 +27,7 @@ class Paginalogin extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Image.asset(
-                    "assets/google.jpg",
+                    "assets/logoGo.png",
                     scale: 4,
                   ),
                   Text(
