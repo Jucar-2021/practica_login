@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class Paginalogin extends StatelessWidget {
@@ -14,13 +13,10 @@ class Paginalogin extends StatelessWidget {
         backgroundColor: Colors.amber,
       ),
       body: Center(
-        child: Expanded(child:
-        Container(
-
-          child: OutlinedButton(
-              onPressed: () {
-
-              },
+        child: Expanded(
+          child: Container(
+            child: OutlinedButton(
+              onPressed: () {},
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -33,8 +29,10 @@ class Paginalogin extends StatelessWidget {
                     style: TextStyle(fontSize: 20),
                   )
                 ],
-              )),
-        ),),
+              ),
+            ),
+          ),
+        ),
       ),
     );
   }
