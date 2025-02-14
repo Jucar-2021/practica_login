@@ -125,7 +125,7 @@ class _PaginabusquedaState extends State<Paginabusqueda> {
                                       child: libro["imagen"]!.isNotEmpty
                                           ? Image.memory(
                                               base64Decode(libro["imagen"]!),
-                                              fit: BoxFit.cover,
+                                              fit: BoxFit.contain,
                                             )
                                           : const Icon(
                                               Icons.image_not_supported,
