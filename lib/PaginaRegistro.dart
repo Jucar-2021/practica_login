@@ -51,10 +51,11 @@ class _PaginaregistroState extends State<Paginaregistro> {
                   },
                   controller: ctrlTitulo,
                   decoration: InputDecoration(
-                      labelText: "Título",
-                      border: new OutlineInputBorder(
-                        borderRadius: new BorderRadius.circular(25.0),
-                      )),
+                    labelText: "Título",
+                    border: new OutlineInputBorder(
+                      borderRadius: new BorderRadius.circular(25.0),
+                    ),
+                  ),
                 ),
                 Padding(padding: EdgeInsets.symmetric(vertical: 15.0)),
                 TextFormField(
@@ -63,10 +64,11 @@ class _PaginaregistroState extends State<Paginaregistro> {
                   },
                   controller: ctrlAutor,
                   decoration: InputDecoration(
-                      labelText: "Autor",
-                      border: new OutlineInputBorder(
-                        borderRadius: new BorderRadius.circular(25.0),
-                      )),
+                    labelText: "Autor",
+                    border: new OutlineInputBorder(
+                      borderRadius: new BorderRadius.circular(25.0),
+                    ),
+                  ),
                 ),
                 Padding(padding: EdgeInsets.symmetric(vertical: 15.0)),
                 TextFormField(
@@ -75,10 +77,11 @@ class _PaginaregistroState extends State<Paginaregistro> {
                   },
                   controller: ctrlGenero,
                   decoration: InputDecoration(
-                      labelText: "Género",
-                      border: new OutlineInputBorder(
-                        borderRadius: new BorderRadius.circular(25.0),
-                      )),
+                    labelText: "Género",
+                    border: new OutlineInputBorder(
+                      borderRadius: new BorderRadius.circular(25.0),
+                    ),
+                  ),
                 ),
                 Padding(padding: EdgeInsets.symmetric(vertical: 15.0)),
                 TextFormField(
@@ -104,10 +107,11 @@ class _PaginaregistroState extends State<Paginaregistro> {
                   },
                   controller: ctrlEditorial,
                   decoration: InputDecoration(
-                      labelText: "Editorial",
-                      border: new OutlineInputBorder(
-                        borderRadius: new BorderRadius.circular(25.0),
-                      )),
+                    labelText: "Editorial",
+                    border: new OutlineInputBorder(
+                      borderRadius: new BorderRadius.circular(25.0),
+                    ),
+                  ),
                 ),
                 Padding(padding: EdgeInsets.symmetric(vertical: 15.0)),
                 imagen != null ? Image.file(imagen!) : Container(),
@@ -124,57 +128,68 @@ class _PaginaregistroState extends State<Paginaregistro> {
                       }
                     },
                     child: Text("Buscar imagen")),
+                Padding(padding: EdgeInsets.symmetric(vertical: 15)),
+                ElevatedButton(
+                    onPressed: () {
+                      if (!formKey.currentState!.validate()) {
+                        setState(
+                          () {
+                            t = ctrlTitulo.text;
+                            a = ctrlAutor.text;
+                            g = ctrlGenero.text;
+                            p = ctrlPaginas.text;
+                            e = ctrlEditorial.text;
+                          },
+                        );
 
-               Padding(padding: EdgeInsets.symmetric(vertical: 15)
-               ), ElevatedButton(onPressed: (){
-                  setState(() {
-                    t = ctrlTitulo.text;
-                    a = ctrlAutor.text;
-                    g = ctrlGenero.text;
-                    p = ctrlPaginas.text;
-                    e = ctrlEditorial.text;
-                  });
-                 Navigator.push(context, MaterialPageRoute(builder: (context)=> CargaLibro(t: t, a: a, g: g, p: p, e: e)));
-                 ctrlTitulo.clear();
-                 ctrlEditorial.clear();
-                 ctrlPaginas.clear();
-                 ctrlGenero.clear();
-                 ctrlAutor.clear();
-                }, child: Text("Extraer Imagen de Libro")),
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    CargaLibro(t: t, a: a, g: g, p: p, e: e)));
+                        ctrlTitulo.clear();
+                        ctrlEditorial.clear();
+                        ctrlPaginas.clear();
+                        ctrlGenero.clear();
+                        ctrlAutor.clear();
+                      }
+                    },
+                    child: Text("Extraer Imagen de Libro")),
                 Padding(padding: EdgeInsets.symmetric(vertical: 15.0)),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     ElevatedButton(
-                        onPressed: () async {
-                          if (!formKey.currentState!.validate()) {
-                            return;
-                          }
-                          Map<String, String> libro = {
-                            "titulo": ctrlTitulo.text,
-                            "autor": ctrlAutor.text,
-                            "genero": ctrlGenero.text,
-                            "paginas": ctrlPaginas.text,
-                            "editorial": ctrlEditorial.text,
-                            "imagen": imagenblob.toString()
-                          };
-                          db.push().set(libro).whenComplete(() {
-                            Navigator.pop(context);
-                            setState(() {});
-                          });
-                        },
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [Text("Guardar"), Icon(Icons.save)],
-                        )),
+                      onPressed: () async {
+                        if (!formKey.currentState!.validate()) {
+                          return;
+                        }
+                        Map<String, String> libro = {
+                          "titulo": ctrlTitulo.text,
+                          "autor": ctrlAutor.text,
+                          "genero": ctrlGenero.text,
+                          "paginas": ctrlPaginas.text,
+                          "editorial": ctrlEditorial.text,
+                          "imagen": imagenblob.toString()
+                        };
+                        db.push().set(libro).whenComplete(() {
+                          Navigator.pop(context);
+                          setState(() {});
+                        });
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [Text("Guardar"), Icon(Icons.save)],
+                      ),
+                    ),
                     Padding(padding: EdgeInsets.symmetric(vertical: 15.0)),
                     ElevatedButton(
                         onPressed: () {
-                          ctrlAutor.text = "";
-                          ctrlEditorial.text = "";
-                          ctrlGenero.text = "";
-                          ctrlPaginas.text = "";
-                          ctrlTitulo.text = "";
+                          ctrlAutor.clear();
+                          ctrlEditorial.clear();
+                          ctrlGenero.clear();
+                          ctrlPaginas.clear();
+                          ctrlTitulo.clear();
                           imagen = null;
                           imagenblob = null;
                           setState(() {});
