@@ -132,6 +132,16 @@ class _PaginaregistroState extends State<Paginaregistro> {
                 ElevatedButton(
                     onPressed: () {
                       if (!formKey.currentState!.validate()) {
+                        //Si hay un campo vacío, muestra un mensaje de error
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                                "Completa todos los campos antes de continuar"),
+                            backgroundColor: Colors.red,
+                          ),
+                        );
+                        return;
+                      } else  {
                         setState(
                           () {
                             t = ctrlTitulo.text;
@@ -153,6 +163,8 @@ class _PaginaregistroState extends State<Paginaregistro> {
                         ctrlGenero.clear();
                         ctrlAutor.clear();
                       }
+
+
                     },
                     child: Text("Extraer Imagen de Libro")),
                 Padding(padding: EdgeInsets.symmetric(vertical: 15.0)),
@@ -162,6 +174,14 @@ class _PaginaregistroState extends State<Paginaregistro> {
                     ElevatedButton(
                       onPressed: () async {
                         if (!formKey.currentState!.validate()) {
+                          //Si hay un campo vacío, muestra un mensaje de error
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                  "Completa todos los campos antes de continuar"),
+                              backgroundColor: Colors.red,
+                            ),
+                          );
                           return;
                         }
                         Map<String, String> libro = {
