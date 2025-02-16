@@ -149,7 +149,9 @@ class _LibrosFirebaseState extends State<LibrosFirebase> {
                                 Text(
                                   '${libro["paginas"]} páginas',
                                   style: TextStyle(
-                                      fontSize: 14, color: Colors.grey[600]),
+                                    fontSize: 14,
+                                    color: Colors.grey[600],
+                                  ),
                                 ),
                               ],
                             ),
@@ -168,19 +170,28 @@ class _LibrosFirebaseState extends State<LibrosFirebase> {
                                   color: Colors.amber[900],
                                 ),
                               ),
-
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
                                 IconButton(
-                                    onPressed: () {
-                                      print("<<<<<<<<<<<<<<<<<<<${claveLibro}>>>>>>>>>>>>>>>>>>>");
-                                      if (claveLibro != null) {
-                                        borrar(claveLibro);
-                                      }
-                                    },
-                                    icon: Icon(Icons.delete, color: Colors.red,size: 30,))
+                                  onPressed: () {
+                                    print(
+                                        "<<<<<<<<<<<<<<<<<<<${claveLibro}>>>>>>>>>>>>>>>>>>>");
+                                    if (claveLibro != null) {
+                                      borrar(claveLibro);
+                                      _mensajeConfir(
+                                          'Registro eliminado',
+                                          'Portada de liblo\n ${mayuslas(libro["titulo"]!)}. \nA sido eliminada',
+                                          context);
+                                    }
+                                  },
+                                  icon: Icon(
+                                    Icons.delete,
+                                    color: Colors.red,
+                                    size: 30,
+                                  ),
+                                )
                               ],
                             )
                           ],
@@ -233,5 +244,30 @@ class _LibrosFirebaseState extends State<LibrosFirebase> {
             ? word[0].toUpperCase() + word.substring(1).toLowerCase()
             : '')
         .join(' ');
+  }
+
+  void _mensajeConfir(String titulo, String mensaje, BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          icon: Image.asset("assets/dele.gif"),
+          title: Text(titulo),
+          content: Text(mensaje),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(); // Cerrar el diálogo
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => LibrosFirebase()),
+                );
+              },
+              child: const Text('Aceptar'),
+            ),
+          ],
+        );
+      },
+    );
   }
 }

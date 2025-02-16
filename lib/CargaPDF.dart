@@ -216,7 +216,7 @@ class _CargaLibroState extends State<CargaLibro> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          icon: const Icon(Icons.check_circle, color: Colors.green, size: 60),
+          icon: Image.asset("assets/confi.gif"),
           title: Text(titulo),
           content: Text(mensaje),
           actions: [
@@ -226,7 +226,7 @@ class _CargaLibroState extends State<CargaLibro> {
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(builder: (context) => LibrosFirebase()),
-                ); // Redirigir a la nueva pantalla
+                );
               },
               child: const Text('Aceptar'),
             ),

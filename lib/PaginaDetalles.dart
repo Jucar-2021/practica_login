@@ -21,7 +21,6 @@ class _PaginadetallesState extends State<Paginadetalles> {
         centerTitle: true,
       ),
       body: SingleChildScrollView(
-
         child: Padding(
           padding: EdgeInsets.all(50),
           child: Column(
@@ -35,10 +34,16 @@ class _PaginadetallesState extends State<Paginadetalles> {
                 ),
               ),
               SizedBox(height: 15),
-
               Text(
                 mayuslas(libro["titulo"]),
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20.0,
+                    color: Colors.blue),
+              ),
+              SizedBox(
+                height: 20,
               ),
               Text(
                 capitalizeNombres(libro["autor"]),
@@ -49,7 +54,7 @@ class _PaginadetallesState extends State<Paginadetalles> {
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
               ),
               Text(
-                capitalize( libro["editorial"]),
+                capitalize(libro["editorial"]),
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
               ),
               Text(
@@ -60,9 +65,9 @@ class _PaginadetallesState extends State<Paginadetalles> {
           ),
         ),
       ),
-
     );
   }
+
   String capitalize(String? text) {
     if (text == null || text.isEmpty) return '';
     return text[0].toUpperCase() + text.substring(1).toLowerCase();

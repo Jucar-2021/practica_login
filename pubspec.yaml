@@ -80,6 +80,9 @@ flutter:
     - assets/libr.jpg
     - assets/efecto.mp3
     - assets/logoGo.gif
+    - assets/warn.gif
+    - assets/confi.gif
+    - assets/dele.gif
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
