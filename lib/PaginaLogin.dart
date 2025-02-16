@@ -29,7 +29,7 @@ class Paginalogin extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Image.asset(
-                  "assets/logoGo.png",
+                  "assets/logoGo.gif",
                   scale: 4,
                   errorBuilder: (context, error, stackTrace) {
                     return Icon(Icons.error, color: Colors.red); // Si hay error, muestra un ícono

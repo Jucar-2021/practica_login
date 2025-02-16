@@ -29,7 +29,7 @@ class Paginalogin extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Image.asset(
-                    "assets/logoGo.png",
+                    "assets/logoGo.gif",
                     width: 50,
                       height: 50,
                   ),
