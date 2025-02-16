@@ -134,7 +134,7 @@ class _PaginaregistroState extends State<Paginaregistro> {
                       if (!formKey.currentState!.validate()) {
                         _mensajeAlert(
                             'Faltan datos',
-                            'Faltan datos Incompletos. \n\nFavor de llenar todos los campos para poder continual',
+                            'Faltan datos Incompletos. \n\nFavor de llenar todos los campos para poder continuar',
                             "assets/warn.gif",
                             context);
 
