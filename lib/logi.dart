@@ -16,6 +16,7 @@ class Paginalogin extends StatelessWidget {
         title: Text("Login"),
         centerTitle: true,
         backgroundColor: Colors.amber,
+        automaticallyImplyLeading: false,
       ),
       body: Center(
         child: Container(

@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:practica_login/logi.dart';
 import 'PaginaBusqueda.dart';
 import 'PaginaDetalles.dart';
 import 'PaginaRegistro.dart';
@@ -179,12 +180,12 @@ class _LibrosFirebaseState extends State<LibrosFirebase> {
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.amber,
-        child: const Icon(Icons.add),
+        child: const Icon(Icons.group_outlined),
         onPressed: () {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => const Paginaregistro(),
+              builder: (context) => const Paginalogin(),
             ),
           );
         },

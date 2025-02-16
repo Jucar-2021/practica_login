@@ -68,7 +68,7 @@ class _PaginabusquedaState extends State<Paginabusqueda> {
       appBar: AppBar(
         title: const Text("Buscar Libro"),
         centerTitle: true,
-        backgroundColor: Colors.amber,
+        backgroundColor: Colors.amber.shade200,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
