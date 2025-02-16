@@ -1,12 +1,11 @@
 import 'dart:convert';
 import 'package:firebase_core/firebase_core.dart';
-
+import 'package:flutter/material.dart';
 import 'PaginaBusqueda.dart';
 import 'PaginaDetalles.dart';
 import 'PaginaRegistro.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
-import 'package:flutter/material.dart';
 
 class LibrosFirebase extends StatefulWidget {
   const LibrosFirebase({super.key});
@@ -16,32 +15,55 @@ class LibrosFirebase extends StatefulWidget {
 }
 
 class _LibrosFirebaseState extends State<LibrosFirebase> {
-  Query query =
-      FirebaseDatabase.instance.ref().child("libro").orderByChild("nombre");
+  Query query = FirebaseDatabase.instance.ref().child("libro").orderByChild("nombre");
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Libreria Firebase"),
-        centerTitle: true,
-        backgroundColor: Colors.amber,
-        actions: [
-          IconButton(
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => Paginabusqueda()));
-              },
-              icon: Icon(Icons.saved_search)),
-          IconButton(
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => Paginaregistro()));
-              },
-              icon: Icon(Icons.new_label))
-        ],
+        title: const Text(
+          "Librería Firebase",
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),centerTitle: true,
+        backgroundColor: Colors.amber.shade500,
+
       ),
-      body: Center(
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            const DrawerHeader(
+              decoration: BoxDecoration(color: Colors.amber),
+              child: Text(
+                'Menú',
+                style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold, color: Colors.black),
+              ),
+            ),
+            ListTile(
+              leading: const Icon(Icons.manage_search),
+              title: const Text('Buscar'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const Paginabusqueda()),
+                );
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.storage),
+              title: const Text('Agregar portada'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const Paginaregistro()),
+                );
+              },
+            ),
+          ],
+        ),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16),
         child: FirebaseAnimatedList(
           query: query,
           itemBuilder: (context, snapshot, animation, index) {
@@ -53,41 +75,109 @@ class _LibrosFirebaseState extends State<LibrosFirebase> {
               "paginas": snapshot.child("paginas").value.toString(),
               "genero": snapshot.child("genero").value.toString(),
             };
-            return GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => Paginadetalles(
-                      libro: libro,
+            return Card(
+
+              elevation: 4,
+              margin: const EdgeInsets.only(bottom: 16),
+              child: InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Paginadetalles(libro: libro),
                     ),
-                  ),
-                );
-              },
-              child: Card(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  );
+                },
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Container(
-                        height: 200,
+                    ClipRRect(
+                      borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(4),
+                        bottomLeft: Radius.circular(4),
+                      ),
+                      child: Image.memory(
+                        base64Decode(snapshot.child("imagen").value.toString()),
                         width: 100,
-                        child: Image.memory(
-                          base64Decode(
-                              snapshot.child("imagen").value.toString()),
-                          scale: 3,
-                        )),
-                    Padding(padding: EdgeInsets.symmetric(vertical: 10.0)),
-                    Text(
-                      snapshot.child("titulo").value.toString(),
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold, fontSize: 20.0),
-                    )
+                        height: 150,
+                        fit: BoxFit.cover,
+                        errorBuilder: (context, error, stackTrace) {
+                          return Container(
+                            width: 100,
+                            height: 150,
+                            color: Colors.grey[200],
+                            child: const Icon(Icons.book, size: 40),
+                          );
+                        },
+                      ),
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(12),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              libro["titulo"]!,
+                              style: const TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            Text(
+                              libro["autor"]!,
+                              style: TextStyle(
+                                fontSize: 14,
+                                color: Colors.grey[600],
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            Row(
+                              children: [
+                                Icon(Icons.book_outlined, size: 16, color: Colors.grey[600]),
+                                const SizedBox(width: 4),
+                                Text(
+                                  '${libro["paginas"]} páginas',
+                                  style: TextStyle(fontSize: 14, color: Colors.grey[600]),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 8),
+                            Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                              decoration: BoxDecoration(
+                                color: Colors.amber[100],
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: Text(
+                                libro["genero"]!,
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  color: Colors.amber[900],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
             );
           },
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.amber,
+        child: const Icon(Icons.add),
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const Paginaregistro()),
+          );
+        },
       ),
     );
   }
