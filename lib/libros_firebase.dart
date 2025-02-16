@@ -15,7 +15,8 @@ class LibrosFirebase extends StatefulWidget {
 }
 
 class _LibrosFirebaseState extends State<LibrosFirebase> {
-  Query query = FirebaseDatabase.instance.ref().child("libro").orderByChild("nombre");
+  Query query =
+      FirebaseDatabase.instance.ref().child("libro").orderByChild("nombre");
 
   @override
   Widget build(BuildContext context) {
@@ -24,9 +25,9 @@ class _LibrosFirebaseState extends State<LibrosFirebase> {
         title: const Text(
           "Librería Firebase",
           style: TextStyle(fontWeight: FontWeight.bold),
-        ),centerTitle: true,
+        ),
+        centerTitle: true,
         backgroundColor: Colors.amber.shade500,
-
       ),
       drawer: Drawer(
         child: ListView(
@@ -36,7 +37,10 @@ class _LibrosFirebaseState extends State<LibrosFirebase> {
               decoration: BoxDecoration(color: Colors.amber),
               child: Text(
                 'Menú',
-                style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold, color: Colors.black),
+                style: TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black),
               ),
             ),
             ListTile(
@@ -45,7 +49,8 @@ class _LibrosFirebaseState extends State<LibrosFirebase> {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const Paginabusqueda()),
+                  MaterialPageRoute(
+                      builder: (context) => const Paginabusqueda()),
                 );
               },
             ),
@@ -55,7 +60,8 @@ class _LibrosFirebaseState extends State<LibrosFirebase> {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const Paginaregistro()),
+                  MaterialPageRoute(
+                      builder: (context) => const Paginaregistro()),
                 );
               },
             ),
@@ -76,7 +82,6 @@ class _LibrosFirebaseState extends State<LibrosFirebase> {
               "genero": snapshot.child("genero").value.toString(),
             };
             return Card(
-
               elevation: 4,
               margin: const EdgeInsets.only(bottom: 16),
               child: InkWell(
@@ -135,17 +140,20 @@ class _LibrosFirebaseState extends State<LibrosFirebase> {
                             const SizedBox(height: 8),
                             Row(
                               children: [
-                                Icon(Icons.book_outlined, size: 16, color: Colors.grey[600]),
+                                Icon(Icons.book_outlined,
+                                    size: 16, color: Colors.grey[600]),
                                 const SizedBox(width: 4),
                                 Text(
                                   '${libro["paginas"]} páginas',
-                                  style: TextStyle(fontSize: 14, color: Colors.grey[600]),
+                                  style: TextStyle(
+                                      fontSize: 14, color: Colors.grey[600]),
                                 ),
                               ],
                             ),
                             const SizedBox(height: 8),
                             Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 8, vertical: 4),
                               decoration: BoxDecoration(
                                 color: Colors.amber[100],
                                 borderRadius: BorderRadius.circular(12),
@@ -175,7 +183,9 @@ class _LibrosFirebaseState extends State<LibrosFirebase> {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const Paginaregistro()),
+            MaterialPageRoute(
+              builder: (context) => const Paginaregistro(),
+            ),
           );
         },
       ),
