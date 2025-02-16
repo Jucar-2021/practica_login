@@ -120,7 +120,7 @@ class _PaginaregistroState extends State<Paginaregistro> {
                     onPressed: () async {
                       ImagePicker picker = new ImagePicker();
                       var imagenSeleccionada =
-                      await picker.pickImage(source: ImageSource.gallery);
+                          await picker.pickImage(source: ImageSource.gallery);
                       if (imagenSeleccionada != null) {
                         imagen = File(imagenSeleccionada.path);
                         imagenblob = base64Encode(imagen!.readAsBytesSync());
@@ -132,18 +132,16 @@ class _PaginaregistroState extends State<Paginaregistro> {
                 ElevatedButton(
                     onPressed: () {
                       if (!formKey.currentState!.validate()) {
-                        //Si hay un campo vacío, muestra un mensaje de error
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(
-                                "Completa todos los campos antes de continuar"),
-                            backgroundColor: Colors.red,
-                          ),
-                        );
+                        _mensajeAlert(
+                            'Faltan datos',
+                            'Faltan datos Incompletos. \n\nFavor de llenar todos los campos para poder continual',
+                            "assets/warn.gif",
+                            context);
+
                         return;
                       } else {
                         setState(
-                              () {
+                          () {
                             t = ctrlTitulo.text;
                             a = ctrlAutor.text;
                             g = ctrlGenero.text;
@@ -156,11 +154,7 @@ class _PaginaregistroState extends State<Paginaregistro> {
                             context,
                             MaterialPageRoute(
                                 builder: (context) =>
-                                    CargaLibro(t: t,
-                                        a: a,
-                                        g: g,
-                                        p: p,
-                                        e: e)));
+                                    CargaLibro(t: t, a: a, g: g, p: p, e: e)));
                         ctrlTitulo.clear();
                         ctrlEditorial.clear();
                         ctrlPaginas.clear();
@@ -194,9 +188,10 @@ class _PaginaregistroState extends State<Paginaregistro> {
                         };
                         db.push().set(libro).whenComplete(() {
                           Navigator.pop(context);
-                          _mensajeAlert('Registro exitoso',
-                              'La portada del libro con titulo\n ${ctrlTitulo.text
-                                  .toUpperCase()}. \nse guardo exitosamente', "assets/confi.gif",
+                          _mensajeAlert(
+                              'Registro exitoso',
+                              'La portada del libro con titulo\n ${ctrlTitulo.text.toUpperCase()}. \nse guardo exitosamente',
+                              "assets/confi.gif",
                               context);
                           setState(() {});
                         });
@@ -231,8 +226,8 @@ class _PaginaregistroState extends State<Paginaregistro> {
     );
   }
 
-  void _mensajeAlert(String titulo, String mensaje, String ico,
-      BuildContext context) {
+  void _mensajeAlert(
+      String titulo, String mensaje, String ico, BuildContext context) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
