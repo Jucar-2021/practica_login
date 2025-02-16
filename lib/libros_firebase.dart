@@ -26,20 +26,49 @@ class _LibrosFirebaseState extends State<LibrosFirebase> {
         title: Text("Libreria Firebase"),
         centerTitle: true,
         backgroundColor: Colors.amber,
-        actions: [
-          IconButton(
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => Paginabusqueda()));
+        automaticallyImplyLeading: false,
+      ),
+      drawer: Drawer(
+        child: ListView(
+          padding: const EdgeInsets.all(40),
+          children: <Widget>[
+        const Text(
+        'Menu',
+          style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+        ),
+        ListTile(
+          leading: const Icon(Icons.manage_search),
+          title: const Text(
+            'Buscar',
+            style: TextStyle(color: Colors.grey),
+          ),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const Paginabusqueda(),
+              ),
+            );
+          },
+        ),
+            ListTile(
+              leading: const Icon(Icons.storage),
+              dense: false,
+              title: const Text(
+                'Agegar portada',
+                style: TextStyle(color: Colors.grey),
+              ),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const Paginaregistro(),
+                  ),
+                );
               },
-              icon: Icon(Icons.saved_search)),
-          IconButton(
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => Paginaregistro()));
-              },
-              icon: Icon(Icons.new_label))
-        ],
+            ),
+          ],
+        ),
       ),
       body: Center(
         child: FirebaseAnimatedList(

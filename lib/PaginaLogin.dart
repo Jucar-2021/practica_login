@@ -1,25 +1,33 @@
+import 'package:flutter/material.dart';
 import 'google_signin.dart';
 import 'libros_firebase.dart';
-import 'package:flutter/material.dart';
 
-class Paginalogin extends StatelessWidget {
+class Paginalogin extends StatefulWidget {
   const Paginalogin({super.key});
 
   @override
+  _PaginaloginState createState() => _PaginaloginState();
+}
+
+class _PaginaloginState extends State<Paginalogin> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text("Login"),
+        title: Text("Valida tu cuanta"),
         centerTitle: true,
         backgroundColor: Colors.amber,
+        actions: [
+
+        ],
       ),
       body: Center(
         child: Container(
           width: 300,
           child: ElevatedButton(
             onPressed: () {
+              setState(() {});
               iniciarConGoogle().whenComplete(() => Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => LibrosFirebase()),
@@ -29,10 +37,10 @@ class Paginalogin extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Image.asset(
-                  "assets/logoGo.png",
+                  "assets/logoGo.gif",
                   scale: 4,
                   errorBuilder: (context, error, stackTrace) {
-                    return Icon(Icons.error, color: Colors.red); // Si hay error, muestra un ícono
+                    return Icon(Icons.error, color: Colors.red);
                   },
                 ),
                 const SizedBox(width: 10),
@@ -42,7 +50,7 @@ class Paginalogin extends StatelessWidget {
                 ),
               ],
             ),
-          )
+          ),
         ),
       ),
     );
