@@ -24,7 +24,7 @@ class _PaginaloginState extends State<Paginalogin> {
           width: 300,
           child: ElevatedButton(
             onPressed: () {
-              setState(() {}); // Forzar la reconstrucción
+              setState(() {});
               iniciarConGoogle().whenComplete(() => Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => LibrosFirebase()),
