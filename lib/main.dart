@@ -1,5 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:soundpool/soundpool.dart';
 import 'logi.dart';
 import 'package:lottie/lottie.dart';
 
@@ -7,9 +9,21 @@ import 'package:lottie/lottie.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  efectoInicio();
   runApp(const MyApp());
 }
+Future<void> efectoInicio() async {
+  // ignore: deprecated_member_use
+  Soundpool pool = Soundpool(streamType: StreamType.notification);
 
+  int soundId = await rootBundle
+      .load("assets/efecto.mp3")
+      .then((ByteData soundData) {
+    return pool.load(soundData);
+  });
+  // ignore: unused_local_variable
+  int streamId = await pool.play(soundId, repeat: 1);
+}
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -31,7 +45,7 @@ class SplashPantalla extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // ajuste del tiempo de pantalla de presentacion
-    Future.delayed(const Duration(seconds: 3), () {
+    Future.delayed(const Duration(milliseconds: 7500), () {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => const Paginalogin()),
@@ -40,7 +54,7 @@ class SplashPantalla extends StatelessWidget {
 
     return Scaffold(
       body: Container(
-        color: Colors.white,
+        color: Colors.black,
         child: Stack(
           children: [
             Positioned.fill(
