@@ -74,6 +74,8 @@ class _LibrosFirebaseState extends State<LibrosFirebase> {
         child: FirebaseAnimatedList(
           query: query,
           itemBuilder: (context, snapshot, animation, index) {
+            String? claveLibro = snapshot.key;
+            if (claveLibro == null) return SizedBox.shrink();
             Map<String, String> libro = {
               "titulo": snapshot.child("titulo").value.toString(),
               "imagen": snapshot.child("imagen").value?.toString() ?? "",
@@ -105,7 +107,7 @@ class _LibrosFirebaseState extends State<LibrosFirebase> {
                       child: Image.memory(
                         base64Decode(snapshot.child("imagen").value.toString()),
                         width: 100,
-                        height: 150,
+                        height: 170,
                         fit: BoxFit.cover,
                         errorBuilder: (context, error, stackTrace) {
                           return Container(
@@ -124,7 +126,7 @@ class _LibrosFirebaseState extends State<LibrosFirebase> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              libro["titulo"]!,
+                              mayuslas(libro["titulo"]!),
                               style: const TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
@@ -132,7 +134,7 @@ class _LibrosFirebaseState extends State<LibrosFirebase> {
                             ),
                             const SizedBox(height: 8),
                             Text(
-                              libro["autor"]!,
+                              capitalizeNombres(libro["autor"]!),
                               style: TextStyle(
                                 fontSize: 14,
                                 color: Colors.grey[600],
@@ -160,13 +162,27 @@ class _LibrosFirebaseState extends State<LibrosFirebase> {
                                 borderRadius: BorderRadius.circular(12),
                               ),
                               child: Text(
-                                libro["genero"]!,
+                                capitalize(libro["genero"]!),
                                 style: TextStyle(
                                   fontSize: 12,
                                   color: Colors.amber[900],
                                 ),
                               ),
+
                             ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                IconButton(
+                                    onPressed: () {
+                                      print("<<<<<<<<<<<<<<<<<<<${claveLibro}>>>>>>>>>>>>>>>>>>>");
+                                      if (claveLibro != null) {
+                                        borrar(claveLibro);
+                                      }
+                                    },
+                                    icon: Icon(Icons.delete, color: Colors.red,size: 30,))
+                              ],
+                            )
                           ],
                         ),
                       ),
@@ -191,5 +207,31 @@ class _LibrosFirebaseState extends State<LibrosFirebase> {
         },
       ),
     );
+  }
+
+  void borrar(String index) async {
+    await FirebaseDatabase.instance.ref().child("libro").child(index).remove();
+    setState(() {});
+  }
+
+  String capitalize(String? text) {
+    if (text == null || text.isEmpty) return '';
+    return text[0].toUpperCase() + text.substring(1).toLowerCase();
+  }
+
+  String mayuslas(String? text) {
+    if (text == null || text.isEmpty) return '';
+    return text.toUpperCase();
+  }
+
+  String capitalizeNombres(String? text) {
+    // Asegurar que acepte null
+    if (text == null || text.isEmpty) return '';
+    return text
+        .split(' ')
+        .map((word) => word.isNotEmpty
+            ? word[0].toUpperCase() + word.substring(1).toLowerCase()
+            : '')
+        .join(' ');
   }
 }

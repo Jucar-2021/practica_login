@@ -35,7 +35,7 @@ class Paginalogin extends StatelessWidget {
                       height: 50,
                   ),
                   Text(
-                    "        Ingress con Google",
+                    "        Ingresa con Google",
                     style: TextStyle(fontSize: 20),
                   )
                 ],

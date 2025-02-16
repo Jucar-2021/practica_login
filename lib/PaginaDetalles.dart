@@ -35,12 +35,13 @@ class _PaginadetallesState extends State<Paginadetalles> {
                 ),
               ),
               SizedBox(height: 15),
+
               Text(
-                libro["titulo"],
+                mayuslas(libro["titulo"]),
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
               ),
               Text(
-                libro["autor"],
+                capitalizeNombres(libro["autor"]),
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
               ),
               Text(
@@ -48,11 +49,11 @@ class _PaginadetallesState extends State<Paginadetalles> {
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
               ),
               Text(
-                libro["editorial"],
+                capitalize( libro["editorial"]),
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
               ),
               Text(
-                libro["genero"],
+                capitalize(libro["genero"]),
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
               ),
             ],
@@ -61,5 +62,22 @@ class _PaginadetallesState extends State<Paginadetalles> {
       ),
 
     );
+  }
+  String capitalize(String? text) {
+    if (text == null || text.isEmpty) return '';
+    return text[0].toUpperCase() + text.substring(1).toLowerCase();
+  }
+
+  String mayuslas(String? text) {
+    if (text == null || text.isEmpty) return '';
+    return text.toUpperCase();
+  }
+
+  String capitalizeNombres(String text) {
+    if (text.isEmpty) return text;
+    return text
+        .split(' ') // Dividir
+        .map((word) => word[0].toUpperCase() + word.substring(1).toLowerCase())
+        .join(' '); // Unir
   }
 }
