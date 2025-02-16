@@ -18,6 +18,9 @@ class _PaginaloginState extends State<Paginalogin> {
         title: Text("Valida tu cuanta"),
         centerTitle: true,
         backgroundColor: Colors.amber,
+        actions: [
+
+        ],
       ),
       body: Center(
         child: Container(
